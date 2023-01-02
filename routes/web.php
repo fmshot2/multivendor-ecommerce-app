@@ -17,8 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+//the ['register'=>false] below removes the register link from
+// dashboard after logging in
+Auth::routes(['register'=>false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Route::group(['prefix'=>'admin',])
+Route::group(['prefix'=>'admin/','middleware'=>'auth'], function(){
+    Route::get('/',[App\Http\Controllers\AdminController::class, 'admin'])->name('admin');
+});
