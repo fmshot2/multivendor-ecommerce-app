@@ -23,6 +23,14 @@ Auth::routes(['register'=>false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+//Admin dashboard
+
 Route::group(['prefix'=>'admin/','middleware'=>'auth'], function(){
     Route::get('/',[App\Http\Controllers\AdminController::class, 'admin'])->name('admin');
+
+    // Banner
+    Route::resource('banner', \App\Http\Controllers\BannerController::class);
 });
+
+// Banner
+Route::resource('banner', \App\Http\Controllers\BannerController::class);
