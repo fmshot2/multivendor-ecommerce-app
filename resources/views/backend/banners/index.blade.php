@@ -29,161 +29,45 @@
 
             <div class="row clearfix">
                 <div class="col-lg-12">
+                    @include('backend.layouts.notification')
+                </div>
+                <div class="col-lg-12">
                     <div class="card">
                         <div class="header">
-                            <h2><strong>Library</strong> List</h2>
-                            <ul class="header-dropdown">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
-                                    <ul class="dropdown-menu dropdown-menu-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another Action</a></li>
-                                        <li><a href="javascript:void(0);">Something else</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                            <h2><strong>Banner</strong> List</h2>
+
                         </div>
                         <div class="body">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <thead>
                                         <tr>
-                                            <th>No.</th>
+                                            <th>S.N.</th>
                                             <th>Title</th>
-                                            <th>Subject</th>
-                                            <th>Department</th>
-                                            <th>Type</th>
-                                            <th>Year</th>
+                                            <th>Description</th>
+                                            <th>Photo</th>
+                                            <th>Condition</th>
                                             <th>Status</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($banners as $item)
                                         <tr>
-                                            <td>1</td>
-                                            <td>Data Structures using C & C++</td>
-                                            <td>C++</td>
-                                            <td>Computar</td>
-                                            <td>PDF</td>
-                                            <td>First Year</td>
-                                            <td>In Stock</td>
+                                            <td>{{$loop->iteration}}</td>
+                                            <td>{{$item->title}}</td>
+                                            <td>{{$item->description}}</td>
+                                            <td><img src="{{$item->photo}}" alt="banner image" style="max-height: 90px; max-width: 200px;"></td>
+                                            <td>
+                                                @if ($item->condition=='banner')
+                                                    <span class="badge badge-success">{{$item->condition}}</span>
+                                                @else
+                                                <span class="badge badge-primary">{{$item->condition}}</span>
+                                                @endif
+                                            </td>
+                                            <td>{{$item->title}}</td>
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Introduction to Computers</td>
-                                            <td>Computers</td>
-                                            <td>Computers</td>
-                                            <td>Book</td>
-                                            <td>Second Year</td>
-                                            <td>In Stock</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Management Information System</td>
-                                            <td>Management</td>
-                                            <td>Information</td>
-                                            <td>PDF</td>
-                                            <td>Fourth Year</td>
-                                            <td>In Stock</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>Operating System Concepts</td>
-                                            <td>Computers</td>
-                                            <td>Computers</td>
-                                            <td>Book</td>
-                                            <td>First Year</td>
-                                            <td>In Stock</td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>Computer Networking</td>
-                                            <td>Management</td>
-                                            <td>Computer</td>
-                                            <td>PDF</td>
-                                            <td>Second Year</td>
-                                            <td>In Stock</td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>Graphics</td>
-                                            <td>Management</td>
-                                            <td>Architecture</td>
-                                            <td>Book</td>
-                                            <td>Fourth Year</td>
-                                            <td>In Stock</td>
-                                        </tr>
-                                        <tr>
-                                            <td>7</td>
-                                            <td>Computer Networks</td>
-                                            <td>Networks</td>
-                                            <td>Computer</td>
-                                            <td>PDF</td>
-                                            <td>First Year</td>
-                                            <td>In Stock</td>
-                                        </tr>
-                                        <tr>
-                                            <td>8</td>
-                                            <td>Animation</td>
-                                            <td>Management</td>
-                                            <td>Computer</td>
-                                            <td>Book</td>
-                                            <td>Fourth Year</td>
-                                            <td>In Stock</td>
-                                        </tr>
-                                        <tr>
-                                            <td>9</td>
-                                            <td>Electronics</td>
-                                            <td>Management</td>
-                                            <td>Computer</td>
-                                            <td>Book</td>
-                                            <td>First Year</td>
-                                            <td>In Stock</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10</td>
-                                            <td>Integrated Circuits</td>
-                                            <td>Management</td>
-                                            <td>Architecture</td>
-                                            <td>Book</td>
-                                            <td>First Year</td>
-                                            <td>In Stock</td>
-                                        </tr>
-                                        <tr>
-                                            <td>11</td>
-                                            <td>Electronics</td>
-                                            <td>Management</td>
-                                            <td>Architecture</td>
-                                            <td>Book</td>
-                                            <td>First Year</td>
-                                            <td>In Stock</td>
-                                        </tr>
-                                        <tr>
-                                            <td>12</td>
-                                            <td>Animation Graphic Fundamentals	</td>
-                                            <td>Management</td>
-                                            <td>Architecture</td>
-                                            <td>Book</td>
-                                            <td>First Year</td>
-                                            <td>In Stock</td>
-                                        </tr>
-                                        <tr>
-                                            <td>13</td>
-                                            <td>Electronics</td>
-                                            <td>Management</td>
-                                            <td>Architecture</td>
-                                            <td>Book</td>
-                                            <td>First Year</td>
-                                            <td>In Stock</td>
-                                        </tr>
-                                        <tr>
-                                            <td>14</td>
-                                            <td>Graphic Designing</td>
-                                            <td>Management</td>
-                                            <td>Architecture</td>
-                                            <td>Book</td>
-                                            <td>First Year</td>
-                                            <td>In Stock</td>
-                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

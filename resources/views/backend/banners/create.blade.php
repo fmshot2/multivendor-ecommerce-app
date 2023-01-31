@@ -18,66 +18,84 @@
             </div>
 
             <div class="row clearfix">
+                <div class="col-md-12">
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+
+                    </div>
+                    @endif
+                </div>
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="card">
                         <div class="body">
-                            <div class="row clearfix">
-                                <div class="col-lg-12 col-md-12">
-                                    <div class="form-group">
-                                        <label for="Title">Title<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" placeholder="Title" name="title"
-                                            value="{{ old('title') }}">
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 col-md-12">
-                                    <div class="form-group">
-                                        <label for="Description">Description</label>
-                                        <div class="input-group">
-                                            <span class="input-group-btn">
-                                                <a id="lfm" data-input="thumbnail" data-preview="holder"
-                                                    class="btn btn-primary">
-                                                    <i class="fa fa-picture-o"></i> Choose
-                                                </a>
-                                            </span>
-                                            <input id="thumbnail" class="form-control" type="text" name="filepath">
+                            <form action="{{ route('banner.store') }}" method="post">
+                                @csrf
+                                <div class="row clearfix">
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="form-group">
+                                            <label for="Title">Title<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" placeholder="Title" name="title"
+                                                value="{{ old('title') }}">
                                         </div>
-                                        <div id="holder" style="margin-top:15px;max-height:100px;"></div>
                                     </div>
-                                </div>
-                                <div class="col-lg-12 col-md-12">
-                                    <div class="form-group">
-                                        <label for="Description">Description</label>
-                                        <textarea id="description" class="form-control" placeholder="Write som text ..." name="description">{{ old('description') }}</textarea>
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="form-group">
+                                            <label for="Description">Description</label>
+                                            <div class="input-group">
+                                                <span class="input-group-btn">
+                                                    <a id="lfm" data-input="thumbnail" data-preview="holder"
+                                                        class="btn btn-primary">
+                                                        <i class="fa fa-picture-o"></i> Choose
+                                                    </a>
+                                                </span>
+                                                <input id="thumbnail" class="form-control" type="text" name="photo">
+                                            </div>
+                                            <div id="holder" style="margin-top:15px;max-height:100px;"></div>
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="form-group">
+                                            <label for="Description">Description</label>
+                                            <textarea id="description" class="form-control" placeholder="Write som text ..." name="description">{{ old('description') }}</textarea>
+                                        </div>
+                                    </div>
 
-                                <label for="Condition"></label>
-                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <select name="condition" class="form-control show-tick">
-                                        <option value="">-- Conditions --</option>
-                                        <option value="banner" {{ old('condition') == 'banner' ? 'selected' : '' }}>Banner
-                                        </option>
-                                        <option value="promo" {{ old('condition') == 'promo' ? 'selected' : '' }}>Promote
-                                        </option>
-                                    </select>
-                                </div>
+                                    <label for="Condition"></label>
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <select name="condition" class="form-control show-tick">
+                                            <option value="">-- Conditions --</option>
+                                            <option value="banner" {{ old('condition') == 'banner' ? 'selected' : '' }}>
+                                                Banner
+                                            </option>
+                                            <option value="promo" {{ old('condition') == 'promo' ? 'selected' : '' }}>
+                                                Promote
+                                            </option>
+                                        </select>
+                                    </div>
 
 
-                                <div class="col-lg-12 col-md-12  col-sm-12">
-                                    <select name="status" class="form-control show-tick">
-                                        <option value="">-- Status --</option>
-                                        <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active
-                                        </option>
-                                        <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>
-                                            Inactive
-                                        </option>
-                                    </select>
+                                    <div class="col-lg-12 col-md-12  col-sm-12">
+                                        <select name="status" class="form-control show-tick">
+                                            <option value="">-- Status --</option>
+                                            <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active
+                                            </option>
+                                            <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>
+                                                Inactive
+                                            </option>
+                                        </select>
+                                    </div>
+
                                 </div>
                                 <div class="col-sm-12">
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                     <button type="submit" class="btn btn-outline-secondary">Cancel</button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
