@@ -15,6 +15,9 @@
 <link rel="stylesheet" href="{{asset('backend/vendor/morrisjs/morris.min.css')}}" />
 <link rel="stylesheet" href="{{asset('backend/assets/vendor/jquery-datatable/dataTables.bootstrap4.min.css')}}">
 
+<!-- summernote -->
+<link rel="stylesheet" href="{{asset('backend/assets/summernote/summernote.css')}}">
+
 
 <!-- MAIN CSS -->
 <link rel="stylesheet" href="{{asset('backend/assets/css/main.css')}}">
