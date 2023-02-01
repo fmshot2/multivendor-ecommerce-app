@@ -65,7 +65,9 @@
                                                 <span class="badge badge-primary">{{$item->condition}}</span>
                                                 @endif
                                             </td>
-                                            <td>{{$item->title}}</td>
+                                            <td>
+                                                <input type="checkbox" data-toggle="switchbutton" checked data-onlabel="active" data-offlabel="inactive" data-size="sm" data-onstyle="success" data-offstyle="danger">
+                                            </td>
                                         </tr>
                                         @endforeach
                                     </tbody>

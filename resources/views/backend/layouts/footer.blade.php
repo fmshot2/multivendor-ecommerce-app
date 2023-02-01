@@ -12,8 +12,8 @@
 <!-- Jquery DataTable Plugin Js -->
 <script src="{{asset('backend/assets/bundles/datatablescripts.bundle.js')}}"></script>
 <script src="{{asset('backend/assets/js/pages/tables/jquery-datatable.js')}}"></script>
+<script src="{{asset('backend/assets/vendor/switch-button-bootstrap/src/bootstrap-switch-button.js')}}"></script>
 <script src="{{asset('backend/assets/js/index.js')}}"></script>
-
 @yield('scripts')
 
 <script>
