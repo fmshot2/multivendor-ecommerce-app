@@ -66,7 +66,11 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <input type="checkbox" data-toggle="switchbutton" checked data-onlabel="active" data-offlabel="inactive" data-size="sm" data-onstyle="success" data-offstyle="danger">
+                                                <input type="checkbox" name="toogle" value="{{$item->id}}" data-toggle="switchbutton" {{$item->status=='active' ? 'checked' : ""}} data-onlabel="active" data-offlabel="inactive" data-size="sm" data-onstyle="success" data-offstyle="danger">
+                                            </td>
+                                            <td>
+                                                <a href="{{route('banner.edit',$item->id)}}" class="btn btn-sm btn-outline-warning" data-toggle="tooltip"  title="edit" data-placement="bottom"><i class="fas fa-edit"></i> </a>
+                                                <a href="" class="btn btn-sm btn-outline-danger" data-toggle="tooltip"  title="delete" data-placement="bottom"><i class="fas fa-trash-alt"></i> </a>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -80,4 +84,32 @@
 
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $('input[name=toogle]').change(function () {
+            var mode=$(this).prop('checked');
+            var id=$(this).val();
+            $.ajax({
+                url:"{{route('banner.status')}}",
+                type:"POST",
+                data:{
+                    _token:'{{csrf_token()}}',
+                    mode:mode,
+                    id:id,
+                },
+                success:function (response) {
+                    if (response.status) {
+                        alert(response.msg);
+                    }
+                    else{
+
+                        alert('try again');
+                    }
+                    console.log(response.status);
+                }
+            })
+        });
+    </script>
 @endsection

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Banner;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class BannerController extends Controller
 {
@@ -17,6 +18,17 @@ class BannerController extends Controller
     {
         $banners=Banner::orderBy('id','DESC')->get();
         return view('backend.banners.index',compact('banners'));;
+    }
+
+    public function bannerStatus(Request $request)
+    {
+        if ($request->mode=='true') {
+            DB::table('banners')->where('id', $request->id)->update(['status'=>'active']);
+        }
+        else{
+            DB::table('banners')->where('id', $request->id)->update(['status'=>'inactive']);
+        }
+        return response()->json(['msg'=> 'Successfully updated status', 'status'=>true]);
     }
 
     /**
@@ -80,7 +92,13 @@ class BannerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $banner=Banner::find($id);
+        if ($banner) {
+            return view('backend.banners.edit', compact('banner'));
+        }
+        else{
+            return back()->with('error','Data not found');
+        }
     }
 
     /**
@@ -92,7 +110,27 @@ class BannerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $banner=Banner::find($id);
+        if ($banner) {
+            $this->validate($request, [
+                'title'=>'string|required',
+                'description'=>'string|nullable',
+                'photo'=> 'required',
+                'condition'=>'nullable|in:banner,promo',
+                'status'=>'nullable|in:active,inactive'
+            ]);
+            $data=$request->all();
+            $status=$banner->fill($data)->save();
+            if ($status) {
+                return redirect()->route('banner.index')->with('success', 'Successfully updated banner');
+            }
+            else {
+                return back()->with('error', 'Something went wrong');
+            }
+        }
+        else{
+            return back()->with('error','Data not found');
+        }
     }
 
     /**
