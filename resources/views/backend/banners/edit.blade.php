@@ -78,19 +78,6 @@
                                             </option>
                                         </select>
                                     </div>
-
-
-                                    <div class="col-lg-12 col-md-12  col-sm-12">
-                                        <select name="status" class="form-control show-tick">
-                                            <option value="">-- Status --</option>
-                                            <option value="active" {{$banner->status == 'active' ? 'selected' : '' }}>Active
-                                            </option>
-                                            <option value="inactive" {{ $banner->status== 'inactive' ? 'selected' : '' }}>
-                                                Inactive
-                                            </option>
-                                        </select>
-                                    </div>
-
                                 </div>
                                 <div class="col-sm-12">
                                     <button type="submit" class="btn btn-primary">Update</button>
