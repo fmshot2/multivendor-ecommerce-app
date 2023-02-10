@@ -47,6 +47,12 @@
                             <ul>
                                 <li><a href="{{route('banner.index')}}">All Banners</a></li>
                                 <li><a href="{{route('banner.create')}}">Add Banner</a></li>
+                             </ul>
+                        </li>
+                        <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-picture"></i><span>Category Management</span> </a>
+                            <ul>
+                                <li><a href="{{route('category.index')}}">All Categories</a></li>
+                                <li><a href="{{route('category.create')}}">Add Category</a></li>
                             </ul>
                         </li>
                         <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-organization"></i><span>Category Management</span> </a>

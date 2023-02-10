@@ -32,7 +32,10 @@ Route::group(['prefix'=>'admin/','middleware'=>'auth'], function(){
     Route::resource('banner', \App\Http\Controllers\BannerController::class);
 });
 
-// Banner
-Route::resource('banner', \App\Http\Controllers\BannerController::class);
+// Banner Section
+Route::resource('/banner', \App\Http\Controllers\BannerController::class);
 Route::post('banner_status', [App\Http\Controllers\BannerController::class, 'bannerStatus'])->name('banner.status');
 
+// Category Section
+Route::resource('/category', \App\Http\Controllers\CategoryController::class);
+Route::post('category_status', [App\Http\Controllers\CategoryController::class, 'categoryStatus'])->name('category.status');
