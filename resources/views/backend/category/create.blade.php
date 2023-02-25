@@ -7,11 +7,11 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-8 col-sm-12">
                         <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i
-                                    class="fa fa-arrow-left"></i></a>Add Banners</h2>
+                                    class="fa fa-arrow-left"></i></a>Add Category</h2>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin') }}"><i class="icon-home"></i></a></li>
-                            <li class="breadcrumb-item">Banners</li>
-                            <li class="breadcrumb-item active">Add Banners</li>
+                            <li class="breadcrumb-item">Category</li>
+                            <li class="breadcrumb-item active">Add Category</li>
                         </ul>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="card">
                         <div class="body">
-                            <form action="{{ route('banner.store') }}" method="post">
+                            <form action="{{ route('category.store') }}" method="post">
                                 @csrf
                                 <div class="row clearfix">
                                     <div class="col-lg-12 col-md-12">
@@ -45,7 +45,28 @@
                                     </div>
                                     <div class="col-lg-12 col-md-12">
                                         <div class="form-group">
-                                            <label for="Description">Description</label>
+                                            <label for="">Summary</label>
+                                            <textarea id="description" class="form-control" placeholder="Write som text ..." name="summary">{{ old('summary') }}</textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Is parent : </label>
+                                            <input type="checkbox" name="is_parent" id="is_parent" value="1" checked >Yes
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12 col-md-12  col-sm-12" id="parent_cat_div">
+                                        <label for="parent_id">Parent Category</label>
+                                        <select name="parent_id" class="form-control show-tick">
+                                            <option value="">-- Parent Category--</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Photo</label>
                                             <div class="input-group">
                                                 <span class="input-group-btn">
                                                     <a id="lfm" data-input="thumbnail" data-preview="holder"
@@ -58,28 +79,9 @@
                                             <div id="holder" style="margin-top:15px;max-height:100px;"></div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-12 col-md-12">
-                                        <div class="form-group">
-                                            <label for="Description">Description</label>
-                                            <textarea id="description" class="form-control" placeholder="Write som text ..." name="description">{{ old('description') }}</textarea>
-                                        </div>
-                                    </div>
-
-                                    <label for="Condition"></label>
-                                    <div class="col-lg-12 col-md-12 col-sm-12">
-                                        <select name="condition" class="form-control show-tick">
-                                            <option value="">-- Conditions --</option>
-                                            <option value="banner" {{ old('condition') == 'banner' ? 'selected' : '' }}>
-                                                Banner
-                                            </option>
-                                            <option value="promo" {{ old('condition') == 'promo' ? 'selected' : '' }}>
-                                                Promote
-                                            </option>
-                                        </select>
-                                    </div>
-
 
                                     <div class="col-lg-12 col-md-12  col-sm-12">
+                                        <label for="status">Status</label>
                                         <select name="status" class="form-control show-tick">
                                             <option value="">-- Status --</option>
                                             <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active
@@ -119,5 +121,18 @@
         $(document).ready(function() {
             $('#description').summernote();
         });
+    </script>
+    <script>
+        $('#is_parent').change(function(e){
+            e.preventDefault();
+            var is_checked=$('#is_parent').prop('checked');
+            // alert(is_checked);
+            if (is_checked) {
+                $('#parent_cat_div').addClass('d-none');
+            }
+            else{
+                $('#parent_cat_div').removeClass('d-none');
+            }
+        })
     </script>
 @endsection

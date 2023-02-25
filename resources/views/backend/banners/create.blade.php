@@ -45,7 +45,7 @@
                                     </div>
                                     <div class="col-lg-12 col-md-12">
                                         <div class="form-group">
-                                            <label for="Description">Description</label>
+                                            <label for="Description">Photo</label>
                                             <div class="input-group">
                                                 <span class="input-group-btn">
                                                     <a id="lfm" data-input="thumbnail" data-preview="holder"
@@ -80,6 +80,7 @@
 
 
                                     <div class="col-lg-12 col-md-12  col-sm-12">
+                                        <label for="status">Status</label>
                                         <select name="status" class="form-control show-tick">
                                             <option value="">-- Status --</option>
                                             <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active

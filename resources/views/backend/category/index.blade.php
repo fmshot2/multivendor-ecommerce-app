@@ -8,7 +8,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i
                                     class="fa fa-arrow-left"></i></a> Categories
-                            <a class="btn btn-sm btn-outline-secondary" href="{{ route('banner.create') }}"><i
+                            <a class="btn btn-sm btn-outline-secondary" href="{{ route('category.create') }}"><i
                                     class="icon-plus"></i>Create Category</a>
                         </h2>
                         <ul class="breadcrumb float-left">
