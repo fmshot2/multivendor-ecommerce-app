@@ -7,11 +7,11 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-8 col-sm-12">
                         <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i
-                                    class="fa fa-arrow-left"></i></a>Add Category</h2>
+                                    class="fa fa-arrow-left"></i></a>Add User</h2>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin') }}"><i class="icon-home"></i></a></li>
-                            <li class="breadcrumb-item">Category</li>
-                            <li class="breadcrumb-item active">Add Category</li>
+                            <li class="breadcrumb-item">Users</li>
+                            <li class="breadcrumb-item active">Add Users</li>
                         </ul>
                     </div>
                 </div>
@@ -20,56 +20,67 @@
             <div class="row clearfix">
                 <div class="col-md-12">
                     @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
 
-                    </div>
+                        </div>
                     @endif
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="card">
                         <div class="body">
-                            <form action="{{ route('category.store') }}" method="post">
+                            <form action="{{ route('user.store') }}" method="post">
                                 @csrf
                                 <div class="row clearfix">
                                     <div class="col-lg-12 col-md-12">
                                         <div class="form-group">
-                                            <label for="Title">Title<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="Title" name="title"
-                                                value="{{ old('title') }}">
+                                            <label for="Full name">Title<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" placeholder="Full name"
+                                                name="full_name" value="{{ old('full_name') }}">
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12">
                                         <div class="form-group">
-                                            <label for="">Summary</label>
-                                            <textarea id="description" class="form-control" placeholder="Write som text ..." name="summary">{{ old('summary') }}</textarea>
+                                            <label for="username">Username</label>
+                                            <input type="text" class="form-control" placeholder="Username"
+                                                name="username" value="{{ old('username') }}">
                                         </div>
                                     </div>
-
                                     <div class="col-lg-12 col-md-12">
                                         <div class="form-group">
-                                            <label for="">Is parent : </label>
-                                            <input type="checkbox" name="is_parent" id="is_parent" value="1">Yes
+                                            <label for="email">Email</label>
+                                            <input type="email" class="form-control" placeholder="Email Address"
+                                                name="email" value="{{ old('email') }}">
                                         </div>
                                     </div>
-
-                                    <div class="col-lg-12 col-md-12  col-sm-12" id="parent_cat_div">
-                                        <label for="parent_id">Parent Category</label>
-                                        <select name="parent_id" class="form-control show-tick">
-                                            <option value="">-- Parent Category--</option>
-                                            @foreach ($parent_cats as $pcats )
-                                            <option value="{{$pcats->id}}">{{$pcats->title}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
                                     <div class="col-lg-12 col-md-12">
                                         <div class="form-group">
-                                            <label for="">Photo</label>
+                                            <label for="password">Password</label>
+                                            <input type="password" class="form-control" placeholder="password"
+                                                name="password" value="{{ old('password') }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="form-group">
+                                            <label for="Phone">Phone</label>
+                                            <input type="phone" class="form-control" placeholder="Phone" name="phone"
+                                                value="{{ old('phone') }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="form-group">
+                                            <label for="address">Address</label>
+                                            <input type="text" class="form-control" placeholder="Address" name="address"
+                                                value="{{ old('address') }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="form-group">
+                                            <label for="Photo">Photo</label>
                                             <div class="input-group">
                                                 <span class="input-group-btn">
                                                     <a id="lfm" data-input="thumbnail" data-preview="holder"
@@ -83,11 +94,29 @@
                                         </div>
                                     </div>
 
+                                    <label for="Role">Role <span class="text-danger">*</span></label>
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <select name="role" class="form-control show-tick">
+                                            <option value="">-- Role --</option>
+                                            <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>
+                                                Admin
+                                            </option>
+                                            <option value="customer" {{ old('role') == 'customer' ? 'selected' : '' }}>
+                                                Customer
+                                            </option>
+                                            <option value="vendor" {{ old('role') == 'vendor' ? 'selected' : '' }}>
+                                                Vendor
+                                            </option>
+                                        </select>
+                                    </div>
+
+
                                     <div class="col-lg-12 col-md-12  col-sm-12">
                                         <label for="status">Status</label>
                                         <select name="status" class="form-control show-tick">
                                             <option value="">-- Status --</option>
-                                            <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active
+                                            <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>
+                                                Active
                                             </option>
                                             <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>
                                                 Inactive
@@ -124,19 +153,5 @@
         $(document).ready(function() {
             $('#description').summernote();
         });
-    </script>
-    <script>
-        $('#is_parent').change(function(e){
-            e.preventDefault();
-            var is_checked=$('#is_parent').prop('checked');
-            // alert(is_checked);
-            if (is_checked) {
-                $('#parent_cat_div').addClass('d-none');
-                $('#parent_cat_div').val('');
-            }
-            else{
-                $('#parent_cat_div').removeClass('d-none');
-            }
-        })
     </script>
 @endsection

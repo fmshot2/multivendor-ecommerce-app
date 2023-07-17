@@ -1,10 +1,12 @@
 <div id="left-sidebar" class="sidebar">
     <div class="sidebar-scroll">
         <div class="user-account">
-            <img src="{{asset('backend/assets/images/user.png')}}" class="rounded-circle user-photo" alt="User Profile Picture">
+            <img src="{{ asset('backend/assets/images/user.png') }}" class="rounded-circle user-photo"
+                alt="User Profile Picture">
             <div class="dropdown">
                 <span>Welcome,</span>
-                <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>Pro. William</strong></a>
+                <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>Pro.
+                        William</strong></a>
                 <ul class="dropdown-menu dropdown-menu-right account">
                     <li><a href="professors-profile.html"><i class="icon-user"></i>My Profile</a></li>
                     <li><a href="app-inbox.html"><i class="icon-envelope-open"></i>Messages</a></li>
@@ -32,9 +34,12 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs">
             <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#admin">Admin</a></li>
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#graduation"><i class="fa fa-graduation-cap"></i></a></li>
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#sub_menu"><i class="icon-grid"></i></a></li>
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#setting"><i class="icon-settings"></i></a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#graduation"><i
+                        class="fa fa-graduation-cap"></i></a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#sub_menu"><i class="icon-grid"></i></a>
+            </li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#setting"><i class="icon-settings"></i></a>
+            </li>
         </ul>
 
         <!-- Tab panes -->
@@ -43,85 +48,113 @@
                 <nav class="sidebar-nav">
                     <ul class="main-menu metismenu">
                         <li class="active"><a href="index.html"><i class="icon-grid"></i><span>Dashboard</span></a></li>
-                        <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-picture"></i><span>Banner Management</span> </a>
+                        <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-picture"></i><span>Banner
+                                    Management</span> </a>
                             <ul>
-                                <li><a href="{{route('banner.index')}}">All Banners</a></li>
-                                <li><a href="{{route('banner.create')}}">Add Banner</a></li>
-                             </ul>
-                        </li>
-                        <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-picture"></i><span>Category Management</span> </a>
-                            <ul>
-                                <li><a href="{{route('category.index')}}">All Categories</a></li>
-                                <li><a href="{{route('category.create')}}">Add Category</a></li>
+                                <li><a href="{{ route('banner.index') }}">All Banners</a></li>
+                                <li><a href="{{ route('banner.create') }}">Add Banner</a></li>
                             </ul>
                         </li>
-                        <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-organization"></i><span>Category Management</span> </a>
+                        <li><a href="javascript:void(0);" class="has-arrow"><i
+                                    class="icon-organization"></i><span>Category Management</span> </a>
+                            <ul>
+                                <li><a href="{{ route('category.index') }}">All Categories</a></li>
+                                <li><a href="{{ route('category.create') }}">Add Category</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-handbag"></i><span>Brands
+                                    Management</span> </a>
+                            <ul>
+                                <li><a href="{{ route('brand.index') }}">All Brands</a></li>
+                                <li><a href="{{ route('brand.create') }}">Add Brands</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="javascript:void(0);" class="has-arrow"><i
+                                    class="icon-organization"></i><span>Product Management</span> </a>
+                            <ul>
+                                <li><a href="{{ route('product.index') }}">All Products</a></li>
+                                <li><a href="{{ route('product.create') }}">Add Products</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="javascript:void(0);" class="has-arrow"><i
+                                    class="icon-organization"></i><span>Category Management</span> </a>
                             <ul>
                                 <li><a href="departments.html">All Departments</a></li>
                                 <li><a href="add-departments.html">Add Departments</a></li>
                             </ul>
                         </li>
-                        <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-briefcase"></i><span>Products Management</span> </a>
+                        <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-briefcase"></i><span>Products
+                                    Management</span> </a>
                             <ul>
                                 <li><a href="departments.html">All Departments</a></li>
                                 <li><a href="add-departments.html">Add Departments</a></li>
                             </ul>
                         </li>
-                        <li><a href="javascript:void(0);" class="has-arrow"><i class="fa fa-basket-loaded"></i><span>Carts Management</span> </a>
+                        <li><a href="javascript:void(0);" class="has-arrow"><i
+                                    class="fa fa-basket-loaded"></i><span>Carts Management</span> </a>
                             <ul>
                                 <li><a href="departments.html">All Departments</a></li>
                                 <li><a href="add-departments.html">Add Departments</a></li>
                             </ul>
                         </li>
-                        <li><a href="javascript:void(0);" class="has-arrow"><i class="fas f-sitemap"></i><span>Post Category</span> </a>
+                        <li><a href="javascript:void(0);" class="has-arrow"><i class="fas f-sitemap"></i><span>Post
+                                    Category</span> </a>
                             <ul>
                                 <li><a href="departments.html">All Departments</a></li>
                                 <li><a href="add-departments.html">Add Departments</a></li>
                             </ul>
                         </li>
-                        <li><a href="javascript:void(0);" class="has-arrow"><i class="fas fa-newspaper"></i><span>Post Tag</span> </a>
+                        <li><a href="javascript:void(0);" class="has-arrow"><i class="fas fa-newspaper"></i><span>Post
+                                    Tag</span> </a>
                             <ul>
                                 <li><a href="departments.html">All Departments</a></li>
                                 <li><a href="add-departments.html">Add Departments</a></li>
                             </ul>
                         </li>
-                        <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-control-pause"></i><span>Post Management</span> </a>
+                        <li><a href="javascript:void(0);" class="has-arrow"><i
+                                    class="icon-control-pause"></i><span>Post Management</span> </a>
                             <ul>
                                 <li><a href="departments.html">All Departments</a></li>
                                 <li><a href="add-departments.html">Add Departments</a></li>
                             </ul>
                         </li>
-                        <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-star"></i><span>Review Management</span> </a>
+                        <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-star"></i><span>Review
+                                    Management</span> </a>
                             <ul>
                                 <li><a href="departments.html">All Departments</a></li>
                                 <li><a href="add-departments.html">Add Departments</a></li>
                             </ul>
                         </li>
-                        <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-check "></i><span>Coupon Management</span> </a>
+                        <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-check "></i><span>Coupon
+                                    Management</span> </a>
                             <ul>
                                 <li><a href="departments.html">All Departments</a></li>
                                 <li><a href="add-departments.html">Add Departments</a></li>
                             </ul>
                         </li>
-                        <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-layers"></i><span>Order Management</span> </a>
+                        <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-layers"></i><span>Order
+                                    Management</span> </a>
                             <ul>
                                 <li><a href="departments.html">All Departments</a></li>
                                 <li><a href="add-departments.html">Add Departments</a></li>
                             </ul>
                         </li>
-                        <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-settings"></i><span>Settings</span> </a>
+                        <li><a href="javascript:void(0);" class="has-arrow"><i
+                                    class="icon-settings"></i><span>Settings</span> </a>
                             <ul>
                                 <li><a href="departments.html">All Departments</a></li>
                                 <li><a href="add-departments.html">Add Departments</a></li>
                             </ul>
                         </li>
-                        <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-people"></i><span>User Management</span> </a>
+                        <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-people"></i><span>User
+                                    Management</span> </a>
                             <ul>
-                                <li><a href="departments.html">All Departments</a></li>
-                                <li><a href="add-departments.html">Add Departments</a></li>
+                                <li><a href="{{ route('user.index') }}">All Users</a></li>
+                                <li><a href="{{ route('user.create') }}">Add Users</a></li>
                             </ul>
                         </li>
-                        <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-bubbles"></i><span>Comments Management</span> </a>
+                        <li><a href="javascript:void(0);" class="has-arrow"><i
+                                    class="icon-bubbles"></i><span>Comments Management</span> </a>
                             <ul>
                                 <li><a href="departments.html">All Departments</a></li>
                                 <li><a href="add-departments.html">Add Departments</a></li>
@@ -167,13 +200,16 @@
                             <a href="#Pages" class="has-arrow"><i class="icon-docs"></i><span>More Pages</span></a>
                             <ul>
                                 <li><a href="page-blank.html">Blank Page</a></li>
-                                <li><a href="page-gallery.html">Image Gallery <span class="badge badge-default float-right">v1</span></a> </li>
-                                <li><a href="page-gallery2.html">Image Gallery <span class="badge badge-warning float-right">v2</span></a> </li>
+                                <li><a href="page-gallery.html">Image Gallery <span
+                                            class="badge badge-default float-right">v1</span></a> </li>
+                                <li><a href="page-gallery2.html">Image Gallery <span
+                                            class="badge badge-warning float-right">v2</span></a> </li>
                                 <li><a href="page-timeline.html">Timeline</a></li>
                                 <li><a href="page-timeline-h.html">Horizontal Timeline</a></li>
                                 <li><a href="page-pricing.html">Pricing</a></li>
                                 <li><a href="page-invoices.html">Invoices</a></li>
-                                <li><a href="page-invoices2.html">Invoices <span class="badge badge-warning float-right">v2</span></a></li>
+                                <li><a href="page-invoices2.html">Invoices <span
+                                            class="badge badge-warning float-right">v2</span></a></li>
                                 <li><a href="page-search-results.html">Search Results</a></li>
                                 <li><a href="page-helper-class.html">Helper Classes</a></li>
                                 <li><a href="page-maintenance.html">Maintenance</a></li>
@@ -182,7 +218,8 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="#uiElements" class="has-arrow"><i class="icon-diamond"></i> <span>UI Elements</span></a>
+                            <a href="#uiElements" class="has-arrow"><i class="icon-diamond"></i> <span>UI
+                                    Elements</span></a>
                             <ul>
                                 <li><a href="ui-typography.html">Typography</a></li>
                                 <li><a href="ui-tabs.html">Tabs</a></li>
@@ -218,17 +255,21 @@
                         <li>
                             <a href="#Tables" class="has-arrow"><i class="icon-tag"></i> <span>Tables</span></a>
                             <ul>
-                                <li><a href="table-basic.html">Tables Example<span class="badge badge-info float-right">New</span></a> </li>
+                                <li><a href="table-basic.html">Tables Example<span
+                                            class="badge badge-info float-right">New</span></a> </li>
                                 <li><a href="table-normal.html">Normal Tables</a> </li>
                                 <li><a href="table-jquery-datatable.html">Jquery Datatables</a> </li>
                                 <li><a href="table-editable.html">Editable Tables</a> </li>
                                 <li><a href="table-color.html">Tables Color</a> </li>
-                                <li><a href="table-filter.html">Table Filter <span class="badge badge-info float-right">New</span></a> </li>
-                                <li><a href="table-dragger.html">Table dragger <span class="badge badge-info float-right">New</span></a> </li>
+                                <li><a href="table-filter.html">Table Filter <span
+                                            class="badge badge-info float-right">New</span></a> </li>
+                                <li><a href="table-dragger.html">Table dragger <span
+                                            class="badge badge-info float-right">New</span></a> </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="#charts" class="has-arrow"><i class="icon-bar-chart"></i> <span>Charts</span></a>
+                            <a href="#charts" class="has-arrow"><i class="icon-bar-chart"></i>
+                                <span>Charts</span></a>
                             <ul>
                                 <li><a href="chart-morris.html">Morris</a> </li>
                                 <li><a href="chart-flot.html">Flot</a> </li>

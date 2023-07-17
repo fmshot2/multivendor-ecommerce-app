@@ -7,15 +7,13 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i
-                                    class="fa fa-arrow-left"></i></a> Categories
-                            <a class="btn btn-sm btn-outline-secondary" href="{{ route('category.create') }}"><i
-                                    class="icon-plus"></i>Create Category</a>
-                        </h2>
+                                    class="fa fa-arrow-left"></i></a> Brands
+                                <a class="btn btn-sm btn-outline-secondary" href="{{route('brand.create')}}"><i class="icon-plus"></i>Create Brand</a></h2>
                         <ul class="breadcrumb float-left">
-                            <li class="breadcrumb-item"><a href="{{ route('admin') }}"><i class="icon-home"></i></a></li>
-                            <li class="breadcrumb-item active">Category</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin')}}"><i class="icon-home"></i></a></li>
+                            <li class="breadcrumb-item active">Brand</li>
                         </ul>
-                        <p class="float-right">Total Categories :{{ \App\Models\Category::count() }}</p>
+                        <p class="float-right">Total Brand{{\App\Models\Brand::count()}}</p>
                     </div>
                 </div>
             </div>
@@ -27,7 +25,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="header">
-                            <h2><strong>Category</strong> List</h2>
+                            <h2><strong>Brands</strong> List</h2>
 
                         </div>
                         <div class="body">
@@ -37,24 +35,21 @@
                                         <tr>
                                             <th>S.N.</th>
                                             <th>Title</th>
-                                            {{-- <th>Description</th> --}}
+                                            <th>Slug</th>
                                             <th>Photo</th>
-                                            <th>Is parent</th>
-                                            <th>Parents</th>
                                             <th>Status</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($categories as $item)
+                                        @foreach ($brands as $item)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $item->title }}</td>
-                                                {{-- <td>{!! html_entity_decode($item->summary) !!}</td> --}}
+                                                <td>{{$item->slug}}</td>
                                                 <td><img src="{{ $item->photo }}" alt="banner image"
-                                                        style="max-height: 90px; max-width: 200px;"></td>
-                                                <td>{{ $item->is_parent == 1 ? 'Yes' : 'No' }}</td>
-                                                <td>{{ \App\Models\Category::where('id', $item->parent_id )->value('title')}}</td>
+                                                        style="max-height: 90px; max-width: 200px;">
+                                                </td>
                                                 <td>
                                                     <input type="checkbox" name="toogle" value="{{ $item->id }}"
                                                         data-toggle="switchbutton"
@@ -63,13 +58,11 @@
                                                         data-onstyle="success" data-offstyle="danger">
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('category.edit', $item->id) }}"
-                                                        class="float-left btn btn-sm btn-outline-warning"
-                                                        data-toggle="tooltip" title="edit" data-placement="bottom"><i
-                                                            class="fas fa-edit"></i>
+                                                    <a href="{{ route('brand.edit', $item->id) }}"
+                                                        class="float-left btn btn-sm btn-outline-warning" data-toggle="tooltip"
+                                                        title="edit" data-placement="bottom"><i class="fas fa-edit"></i>
                                                     </a>
-                                                    <form class="float-left ml-1"
-                                                        action="{{ route('category.destroy', $item->id) }}" method="post">
+                                                    <form class="float-left ml-1" action="{{ route('brand.destroy', $item->id) }}" method="post">
                                                         @csrf
                                                         @method('delete')
                                                         <a href="" data-toggle="tooltip" title="delete"
@@ -127,8 +120,9 @@
         $('input[name=toogle]').change(function() {
             var mode = $(this).prop('checked');
             var id = $(this).val();
+            // alert(id);
             $.ajax({
-                url: "{{ route('category.status') }}",
+                url: "{{ route('brand.status') }}",
                 type: "POST",
                 data: {
                     _token: '{{ csrf_token() }}',
