@@ -52,7 +52,7 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td><img src="{{ $item->photo }}" alt="banner image"
-                                                        style="border-radius:50%;max-height: 90px; max-width: 200px;"></td>
+                                                        style="border-radius:50%; height: 60px; width: 60px;"></td>
                                                 <td>{{ $item->full_name }}</td>
 
                                                 <td>{{ $item->email }}</td>

@@ -108,7 +108,29 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        if ($user) {
+            $this->validate($request, [
+                'full_name' =>  'string|required',
+                'username'  =>  'string|required',
+                'email'     =>  'email|required|exists:users,email',
+                'phone'     =>  'string|nullable',
+                'photo'     =>  'required',
+                'address'   =>  'string|nullable',
+                'role'      =>  'required|in:admin,customer,vendor',
+                'status'    =>  'required|in:active,inactive',
+            ]);
+            $data = $request->all();
+
+            $status = $user->fill($data)->save();
+            if ($status) {
+                return redirect()->route('user.index')->with('success', 'User successfully updated');
+            } else {
+                return back()->with('error', 'Something went wrong');
+            }
+        } else {
+            return back()->with('error', 'User not found');
+        }
     }
 
     /**
@@ -119,6 +141,14 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        if ($user) {
+            $status = $user->delete();
+            if ($status) {
+                return redirect()->route('user.index')->with('success', 'User successfully deleted');
+            } else {
+                return back()->with('error', 'Something went wrong');
+            }
+        }
     }
 }
