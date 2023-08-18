@@ -2,7 +2,7 @@
 Multivendor Ecommerce App is a multivendor ecommerce app built with PHP/Laravel. It includes a full admin mangement system for the Users, Products, Categories, etc. The Userr part involves a full search, filter, cart, wishlist and payment systems:
 
 ## Running the Project
- To run, download, unzip, add your db in the env, then run the migratation and seed commands.
+ To run, download, unzip, add your db in the env, then run the migration and seed commands.
  
 ## Suggestions
 
@@ -14,4 +14,4 @@ The Project is an open-sourced software licensed under the [MIT license](https:/
 
 ## Follow
 
-Follow me on linkedIn (https://www.linkedin.com/in/femi-shotola) or on twitter: https://twitter.com/_fmshot for more great open source tools.
+Follow me on LinkedIn (https://www.linkedin.com/in/femi-shotola), Medium (https://medium.com/@femishotolaa) or on twitter: https://twitter.com/_fmshot for more great open source tools.
