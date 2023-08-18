@@ -4,9 +4,9 @@ Multivendor Ecommerce App is a multivendor ecommerce app built with PHP/Laravel.
 ## Running the Project
  To run, download, unzip, add your db in the env, then run the migratation and seed commands.
  
-## Security Vulnerabilities
+## Suggestions
 
-If you discover a security vulnerability within this app or any of my open source project, please send an e-mail to Femi Shotola via [femishotolaa@gmail.com](mailto:femishotolaa@gmail.com). All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within this app or any of my open source projects, please send an e-mail to Femi Shotola via [femishotolaa@gmail.com](mailto:femishotolaa@gmail.com). All security vulnerabilities will be promptly addressed.
 
 ## License
 
