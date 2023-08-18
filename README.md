@@ -1,5 +1,5 @@
 ## About Multivendor Ecommerce App
-Multivendor Ecommerce App is a multivendor ecommerce app built with PHP/Laravel. It includes a full admin mangement system for the Users, Products, Categories, etc. The Userr part involves a full search, filter, cart, wishlist and payment systems:
+Multivendor Ecommerce App is a multivendor ecommerce app built with PHP/Laravel. It includes a full admin mangement system for the Users, Products, Categories, etc. The User part involves a full search, filter, cart, wishlist and payment systems:
 
 ## Running the Project
  To run, download, unzip, add your db in the env, then run the migration and seed commands.
