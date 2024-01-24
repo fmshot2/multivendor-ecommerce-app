@@ -18,6 +18,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\Frontend\IndexController::class, 'home'])->name('home');
 
+//Product category
+Route::get('product-category/{slug}/', [App\Http\Controllers\Frontend\IndexController::class, 'productCategory'])->name('product.category');
+
+//Product detail
+Route::get('product-detail/{slug}/', [App\Http\Controllers\Frontend\IndexController::class, 'productDetail'])->name('product.detail');
+
 //End Frontend Section
 
 //the ['register'=>false] below removes the register link from

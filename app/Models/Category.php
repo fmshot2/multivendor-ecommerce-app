@@ -17,4 +17,8 @@ class Category extends Model
     public static function getChildByParentID($id){
         return Category::where('parent_id', $id)->pluck('title', 'id');
     }
+
+    public  function products(){
+        return $this->hasMany('App\Models\Product', 'cat_id', 'id');
+    }
 }

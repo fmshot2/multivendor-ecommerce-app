@@ -27,4 +27,9 @@ class Product extends Model
     'status'
 ];
 
+
+public  function brand(){
+    return $this->belongsTo('App\Models\Brand');
+}
+
 }

@@ -64,7 +64,7 @@
                     <nav class="classy-navbar" id="bigshopNav">
 
                         <!-- Nav Brand -->
-                        <a href="index.html" class="nav-brand"><img src="frontend/img/core-img/logo.png"
+                        <a href="{{route('home')}}" class="nav-brand"><img src="{{asset('frontend/img/core-img/logo.png')}}"
                                 alt="logo"></a>
 
                         <!-- Toggler -->
@@ -82,14 +82,14 @@
                             <!-- Nav -->
                             <div class="classynav">
                                 <ul>
-                                    <li><a href="#">Home</a>
+                                    <li class="cn-dropdown-item has-down"><a href="#">Home</a>
                                         <ul class="dropdown">
                                             <li><a href="index-1.html">Home - 1</a></li>
                                             <li><a href="index-2.html">Home - 2</a></li>
                                             <li><a href="index-3.html">Home - 3</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="#">Shop</a>
+                                    <li class="cn-dropdown-item has-down"><a href="#">Shop</a>
                                         <ul class="dropdown">
                                             <li><a href="#">Shop Grid</a>
                                                 <ul class="dropdown">
@@ -142,7 +142,7 @@
                                             <li><a href="compare.html">Compare</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="#">Pages</a>
+                                    <li class="megamenu-item"><a href="#">Pages</a>
                                         <div class="megamenu">
                                             <ul class="single-mega cn-col-4">
                                                 <li><a href="about-us.html">- About Us</a></li>
@@ -174,7 +174,7 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <li><a href="#">Blog</a>
+                                    <li class="cn-dropdown-item has-down"><a href="#">Blog</a>
                                         <ul class="dropdown">
                                             <li><a href="blog-with-left-sidebar.html">Blog Left Sidebar</a></li>
                                             <li><a href="blog-with-right-sidebar.html">Blog Right Sidebar</a></li>
@@ -182,7 +182,7 @@
                                             <li><a href="single-blog.html">Single Blog</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="#">Elements</a>
+                                    <li class="megamenu-item"><a href="#">Elements</a>
                                         <div class="megamenu">
                                             <ul class="single-mega cn-col-4">
                                                 <li><a href="accordian.html">- Accordions</a></li>
