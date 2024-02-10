@@ -14,7 +14,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+
 //Frontend Section
+
+//authentication
+
+
+Route::get('user/auth', [App\Http\Controllers\Frontend\IndexController::class, 'userAuth'])->name('user.auth');
+
+Route::post('user/login', [App\Http\Controllers\Frontend\IndexController::class, 'loginSubmit'])->name('login.submit');
+
+Route::post('user/register', [App\Http\Controllers\Frontend\IndexController::class, 'registerSubmit'])->name('register.submit');
+Route::get('user/logout', [App\Http\Controllers\Frontend\IndexController::class, 'userLogout'])->name('user.logout');
+
 
 Route::get('/', [App\Http\Controllers\Frontend\IndexController::class, 'home'])->name('home');
 
@@ -34,7 +46,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 
 //Admin dashboard
 
-Route::group(['prefix' => 'admin/', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'admin/', 'middleware' => ['auth', 'admin']], function () {
     Route::get('/', [App\Http\Controllers\AdminController::class, 'admin'])->name('admin');
 
     // Banner
@@ -62,4 +74,17 @@ Route::group(['prefix' => 'admin/', 'middleware' => 'auth'], function () {
     // User Section
     Route::resource('/user', \App\Http\Controllers\UserController::class);
     Route::post('user_status', [App\Http\Controllers\UserController::class, 'userStatus'])->name('user.status');
+});
+
+Route::group(['prefix' => 'seller', 'middleware' => ['auth', 'seller']], function () {
+    Route::get('/', [App\Http\Controllers\AdminController::class, 'admin'])->name('seller');
+});
+
+//User Dashboard
+// Route::group(['prefix' => 'user', 'middleware' => ['auth', 'user']], function () {
+Route::group(['prefix' => 'user'], function () {
+    Route::get('/dashboard', [App\Http\Controllers\Frontend\IndexController::class, 'userDashboard'])->name('user.dashboard');
+    Route::get('/order', [App\Http\Controllers\Frontend\IndexController::class, 'userOrder'])->name('user.order');
+    Route::get('/address', [App\Http\Controllers\Frontend\IndexController::class, 'userAddress'])->name('user.address');
+    Route::get('/account-detail', [App\Http\Controllers\Frontend\IndexController::class, 'userAccount'])->name('user.account');
 });

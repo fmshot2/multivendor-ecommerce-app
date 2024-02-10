@@ -84,8 +84,8 @@
                 <div class="col-12">
                     <h5>Shop Grid</h5>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-                        <li class="breadcrumb-item active">{{$categories->title}}</li>
+                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                        <li class="breadcrumb-item active">{{ $categories->title }}</li>
                     </ol>
                 </div>
             </div>
@@ -109,75 +109,34 @@
                                     title="List View"><i class="icofont-listine-dots"></i></a>
                             </div>
                         </div>
-                        <select class="small right">
-                            <option selected>Short by Popularity</option>
-                            <option value="1">Short by Newest</option>
-                            <option value="2">Short by Sales</option>
-                            <option value="3">Short by Ratings</option>
+                        <select id="sortBy" class="small right">
+                            <option selected>Default Sort</option>
+                            <option value="priceAsc" {{ old('sortBy') == 'priceAsc' ? 'selected' : '' }}>Price - Lower To
+                                Higher</option>
+                            <option value="priceDesc">Price - Higher To Lower</option>
+                            <option value="titleAsc">Alphebetical Ascending</option>
+                            <option value="titleDesc">Alphebetical Descending</option>
+                            <option value="discAsc">Discount - Lower To Higher</option>
+                            <option value="disceDesc">Discount - Higher To Lower</option>
                         </select>
                     </div>
 
                     <div class="shop_grid_product_area">
-                        <div class="row justify-content-center">
+                        <div class="row justify-content-center" id="product-data">
+
+                            @include('frontend.layouts._single-product')
                             <!-- Single Product -->
-                            @if (count($categories->products) > 2)
-                            @foreach ($categories->products as $item)
-                            <div class="col-9 col-sm-6 col-md-4 col-lg-3">
-                                <div class="single-product-area mb-30">
-                                    <div class="product_image">
-                                        @php
-                                            $photo=explode(',', $item->photo);
-                                        @endphp
-                                        <!-- Product Image -->
-                                        <img class="normal_img" src="{{$photo[0]}}" alt="">
-                                        {{-- <img class="hover_img" src="{{$photo[0]}}" alt=""> --}}
-
-                                        <!-- Product Badge -->
-                                        <div class="product_badge">
-                                            <span>{{$item->conditions}}</span>
-                                        </div>
-
-                                        <!-- Wishlist -->
-                                        <div class="product_wishlist">
-                                            <a href="wishlist.html"><i class="icofont-heart"></i></a>
-                                        </div>
-
-                                        <!-- Compare -->
-                                        <div class="product_compare">
-                                            <a href="compare.html"><i class="icofont-exchange"></i></a>
-                                        </div>
-                                    </div>
-
-                                    <!-- Product Description -->
-                                    <div class="product_description">
-                                        <!-- Add to cart -->
-                                        <div class="product_add_to_cart">
-                                            <a href="#"><i class="icofont-shopping-cart"></i> Add to Cart</a>
-                                        </div>
-
-                                        <!-- Quick View -->
-                                        <div class="product_quick_view">
-                                            <a href="#" data-toggle="modal" data-target="#quickview"><i
-                                                    class="icofont-eye-alt"></i> Quick View</a>
-                                        </div>
-
-                                        <p class="brand_name">{{\App\Models\Brand::where('id', $item->brand_id)->value('title')}}</p>
-                                        <a href="{{route('product-detail', $item->slug)}}">{{ucfirst($item->title)}}</a>
-                                        <h6 class="product-price">{{number_format($item->offer_price, 2)}} <small><del class="text-danger">{{number_format($item->price, 2)}}</del></small></h6>
-                                    </div>
-                                </div>
-                            </div>
-                            @endforeach
-
-                            @else
-                                <p>No Product Found</p>
-                            @endif
-
                         </div>
                     </div>
 
                     <!-- Shop Pagination Area -->
-                    <div class="shop_pagination_area mt-30">
+                    <div class="ajax-load text-center" style="display: none">
+                        {{-- <div class="ajax-load text-center"> --}}
+                        <img src="{{ asset('frontend/img/loader.gif') }}" alt="" style="width: 6%;">
+                    </div>
+
+                    {{-- // u can use this for normal pagination --}}
+                    {{-- <div class="shop_pagination_area mt-30">
                         <nav aria-label="Page navigation">
                             <ul class="pagination pagination-sm justify-content-center">
                                 <li class="page-item">
@@ -198,10 +157,72 @@
                                 </li>
                             </ul>
                         </nav>
-                    </div>
+                    </div> --}}
 
                 </div>
             </div>
         </div>
     </section>
+@endsection
+
+
+@section('scripts')
+    <script>
+        $('#sortBy').change(function() {
+            var sort = $("#sortBy").val();
+            console.log("sorted", sort);
+            window.location = "{{ url('' . $route . '') }}/{{ $categories->slug }}?sort=" + sort;
+        });
+
+        function loadmoreData(page, emded) {
+            $.ajax({
+                    url: "?page=" + page,
+                    type: "get",
+                    beforeSend: function() {
+                        $(".ajax-load").show();
+                    },
+                })
+                .done(function(data, ended) {
+                    console.log('html', data);
+
+                    // let myVariable = JSON.parse("{!! json_encode($products) !!}");
+
+                    // old implementation from tutorial ..works in addition to line 217
+                    // if (data.html="") {
+                    //     console.log('html2', data);
+
+                    //     $(".ajax-load").html("No more product available");
+                    //     return;
+                    // }
+
+                    $(".ajax-load").hide();
+                    $("#product-data").append(data.html);
+
+                })
+                .fail(function() {
+                    alert("Something went wrong! please try again");
+                });
+        };
+
+        var page = 1;
+        $(window).scroll(function() {
+            if ($(window).scrollTop() + $(window).height() + 120 >= $(document).height()) {
+                // old implementation from tutorial i.e no if checks, the guy just called the next two lines immediately
+                // page++;
+                // loadmoreData(page, ended);
+
+                // my implementation..works in conjuction with line 200 if (data.html="") {
+                myVariable = <?php echo json_encode($products); ?>
+
+                let ended = false;
+
+                if (page <= myVariable.last_page) {
+                    console.log("myVariable", page);
+                    ended = true
+                    page++;
+                    loadmoreData(page, ended);
+                }
+            }
+        })
+    </script>
 @endsection

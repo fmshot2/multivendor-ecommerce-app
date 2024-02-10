@@ -29,11 +29,11 @@ class UsersTableSeeder extends Seeder
 
             //Vendor
             [
-                'full_name' => 'Femi Vendor',
-                'username' => 'Vendor',
-                'email' => 'vendor@gmail.com',
+                'full_name' => 'Femi Seller',
+                'username' => 'seller',
+                'email' => 'seller@gmail.com',
                 'password' => Hash::make('1111'),
-                'role' => 'vendor',
+                'role' => 'seller',
                 'status' => 'active',
             ],
 

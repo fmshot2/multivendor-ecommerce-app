@@ -22,7 +22,7 @@ class UserFactory extends Factory
             'phone' => $this->faker->phoneNumber,
             'address' => $this->faker->address,
             'photo' => $this->faker->imageUrl('60', '60'),
-            'role' => $this->faker->randomElement(['admin', 'vendor', 'customer']),
+            'role' => $this->faker->randomElement(['admin', 'seller', 'customer']),
             'status' => $this->faker->randomElement(['active','inactive']),
             'remember_token' => Str::random(10),
         ];

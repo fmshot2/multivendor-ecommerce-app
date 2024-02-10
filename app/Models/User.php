@@ -26,7 +26,16 @@ class User extends Authenticatable
         'password',
         'address',
         'role',
-        'status',
+        'country',
+        'city',
+        'postcode',
+        'state',
+        'address',
+        'scountry',
+        'scity',
+        'spostcode',
+        'sstate',
+        'saddress',
     ];
 
     /**
