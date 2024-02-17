@@ -31,7 +31,7 @@
               <div class="product_description">
                   <!-- Add to cart -->
                   <div class="product_add_to_cart">
-                      <a href="#"><i class="icofont-shopping-cart"></i> Add to
+                      <a href="#" data-quantity="1" data-product-id="{{$item->id}}" class="add_to_cart" id="add_to_cart{{$item->id}}"><i class="icofont-shopping-cart"></i> Add to
                           Cart</a>
                   </div>
 

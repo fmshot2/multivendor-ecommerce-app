@@ -37,31 +37,24 @@ class IndexController extends Controller
         } else {
             if ($sort == "priceAsc") {
                 $products = Product::where(['status' => 'active', 'cat_id' => $categories->id])->orderBy('offer_price', 'ASC')->paginate(12);
-            }
-            elseif ($sort == "priceDesc") {
+            } elseif ($sort == "priceDesc") {
                 $products = Product::where(['status' => 'active', 'cat_id' => $categories->id])->orderBy('offer_price', 'DESC')->paginate(12);
-            }
-            elseif ($sort == "discAsc") {
+            } elseif ($sort == "discAsc") {
                 $products = Product::where(['status' => 'active', 'cat_id' => $categories->id])->orderBy('price', 'ASC')->paginate(12);
-            }
-            elseif ($sort == "discDesc") {
+            } elseif ($sort == "discDesc") {
                 $products = Product::where(['status' => 'active', 'cat_id' => $categories->id])->orderBy('price', 'ASC')->paginate(12);
-            }
-            elseif ($sort == "titleAsc") {
+            } elseif ($sort == "titleAsc") {
                 $products = Product::where(['status' => 'active', 'cat_id' => $categories->id])->orderBy('title', 'ASC')->paginate(12);
-            }
-            elseif ($sort == "titleDesc") {
+            } elseif ($sort == "titleDesc") {
                 $products = Product::where(['status' => 'active', 'cat_id' => $categories->id])->orderBy('title', 'DESC')->paginate(12);
-            }
-            else {
+            } else {
                 $products = Product::where(['status' => 'active', 'cat_id' => $categories->id])->paginate(12);
-
             }
         }
         $route = 'product-category';
         if ($request->ajax()) {
-            $view=view("frontend.layouts._single-product", compact("products"))->render();
-            return response()->json(["html"=>$view]);
+            $view = view("frontend.layouts._single-product", compact("products"))->render();
+            return response()->json(["html" => $view]);
         }
         return view('frontend.pages.product.product-category', compact(['categories', "route", "products"]));
     }
@@ -160,5 +153,82 @@ class IndexController extends Controller
     {
         $user = Auth::user();
         return view("frontend.user.account", compact("user"));
+    }
+
+    public function billingAddress(Request $request, $id)
+    {
+        $user = User::where("id", $id)->update([
+            "country" => $request->country,
+            "city" => $request->city,
+            "postcode" => $request->postcode,
+            "address" => $request->address,
+            "address" => $request->address,
+            "state" => $request->state,
+            "address" => $request->address,
+            "address" => $request->address
+        ],);
+        if ($user) {
+            return back()->with('success', "Billing Address successfully updated");
+        } else {
+            return back()->with('error', "Something went wrong!");
+        }
+    }
+
+    public function shippingingAddress(Request $request, $id)
+    {
+        $user = User::where("id", $id)->update([
+            "scountry" => $request->scountry,
+            "scity" => $request->scity,
+            "spostcode" => $request->spostcode,
+            "saddress" => $request->saddress,
+            "saddress" => $request->saddress,
+            "sstate" => $request->sstate,
+            "saddress" => $request->saddress,
+        ],);
+        if ($user) {
+            return back()->with('success', "Shipping Address successfully updated");
+        } else {
+            return back()->with('error', "Something went wrong!");
+        }
+    }
+
+    public function updateAccount(Request $request, $id)
+    {
+
+        $this->validate($request, [
+            'full_name' => 'required|string',
+            'username' => 'nullable|string',
+            'newpassword' => 'nullable|min:4',
+            'oldpassword' => 'nullable|min:4',
+            'phone' => 'nullable|min:8'
+        ]);
+        $hashpassword = Auth::user()->password;
+        if ($request->oldpassword == null && $request->newpassword == null) {
+            $user = User::where("id", $id)->update([
+                "full_name" => $request->full_name,
+                "username" => $request->username,
+                "phone" => $request->phone,
+            ],);
+            return back()->with('success', "Account successfully updated");
+
+        } else {
+            if (Hash::check($request->oldpassword, $hashpassword)) {
+                if (!Hash::check($request->newpassword, $hashpassword)) {
+                    $user = User::where("id", $id)->update([
+                        "full_name" => $request->full_name,
+                        "username" => $request->username,
+                        "phone" => $request->phone,
+                        "password" => Hash::make($request->newpassword),
+                    ],
+                );
+
+                return back()->with('success', "Account successfully updated");
+                } else {
+                    return back()->with('error', "New password cannot be the same with old password!");
+                }
+            } else {
+                return back()->with('error', "New password cannot be the same with old!");
+            }
+        }
     }
 }

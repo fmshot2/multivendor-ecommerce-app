@@ -44,6 +44,12 @@ Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 
+//Cart Section
+Route::get('/cart/store', [App\Http\Controllers\Frontend\CartController::class, 'cartStore'])->name("cart.store");
+
+// Route::group(['prefix' => 'user', 'middleware' => ['auth', 'user']], function () {
+
+
 //Admin dashboard
 
 Route::group(['prefix' => 'admin/', 'middleware' => ['auth', 'admin']], function () {
@@ -81,10 +87,16 @@ Route::group(['prefix' => 'seller', 'middleware' => ['auth', 'seller']], functio
 });
 
 //User Dashboard
-// Route::group(['prefix' => 'user', 'middleware' => ['auth', 'user']], function () {
 Route::group(['prefix' => 'user'], function () {
     Route::get('/dashboard', [App\Http\Controllers\Frontend\IndexController::class, 'userDashboard'])->name('user.dashboard');
     Route::get('/order', [App\Http\Controllers\Frontend\IndexController::class, 'userOrder'])->name('user.order');
     Route::get('/address', [App\Http\Controllers\Frontend\IndexController::class, 'userAddress'])->name('user.address');
     Route::get('/account-detail', [App\Http\Controllers\Frontend\IndexController::class, 'userAccount'])->name('user.account');
+
+//billing
+    Route::post('/billing/address/{id}', [App\Http\Controllers\Frontend\IndexController::class, 'billingAddress'])->name('billing.address');
+    Route::post('/shipping/address/{id}', [App\Http\Controllers\Frontend\IndexController::class, 'shippingingAddress'])->name('shipping.address');
+
+    Route::post('/update/account/{id}', [App\Http\Controllers\Frontend\IndexController::class, 'updateAccount'])->name('update.account');
+
 });
