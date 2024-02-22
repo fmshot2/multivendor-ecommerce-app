@@ -226,9 +226,9 @@
         })
     </script>
     <script>
-        $(document).on("click", "add_to_cart", function(e) {
-            e,
-            preventDefault();
+        $(document).on("click", ".add_to_cart", function(e) {
+            e.preventDefault();
+
             var product_id = $(this).data("product-id");
             var product_qty = $(this).data("quantity");
 
@@ -237,7 +237,7 @@
             var path = "{{ route('cart.store') }}";
 
             $.ajax({
-                url: "?page=" + page,
+                url: path,
                 type: "POST",
                 dataType: "JSON",
                 data: {
@@ -246,15 +246,26 @@
                     _token: token,
                 },
                 beforeSend: function() {
-                    $(".add_to_cart" + product_id).html("<i class="
-                        fa fa - spinner fa - spin "></i> Loading ...");
+                    $(".add_to_cart" + product_id).html('<i class="fa fa-spinner fa-spin"></i> Loading ...');
                 },
                 complete: function() {
-                    $(".add_to_cart" + product_id).html("<i class="
-                        fa fa - cart - plus "></i> Add to cart");
+                    $(".add_to_cart" + product_id).html('<i class="fa fa-cart-plus"></i> Add to cart');
                 },
-                beforeSend: function(data) {
+                success: function(data) {
                     console.log(data);
+                    // $('body #header-ajax').html(data['header']);
+                    if (data["status"]) {
+                        $('body #header-ajax').html(data['header']);
+                        $('body #cart_counter').html(data['cart_count']);
+                        swal({
+                            title: "Good job!",
+                            text: data["message"],
+                            icon: "success",
+                            button: "Ok",
+                        });
+                    } else {
+
+                    }
                 }
             });
         });

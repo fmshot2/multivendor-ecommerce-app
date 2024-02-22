@@ -21,7 +21,8 @@ class CategoryFactory extends Factory
             'photo'=>$this->faker->imageUrl('350','350'),
             // 'photo'=>$this->faker->imageUrl('100','100'),
             'is_parent'=>$this->faker->randomElement([true,false]),
-            'status'=>$this->faker->randomElement(['active','inactive']),
+            // 'status'=>$this->faker->randomElement(['active','inactive']),
+            'status'=>$this->faker->randomElement(['active']),
             'parent_id'=>$this->faker->randomElement(Category::pluck('id')->toArray()),
         ];
     }

@@ -36,6 +36,10 @@ Route::get('product-category/{slug}/', [App\Http\Controllers\Frontend\IndexContr
 //Product detail
 Route::get('product-detail/{slug}/', [App\Http\Controllers\Frontend\IndexController::class, 'productDetail'])->name('product.detail');
 
+//Cart Section
+Route::post('/cart/store', [App\Http\Controllers\Frontend\CartController::class, 'cartStore'])->name("cart.store");
+Route::post('/cart/delete', [App\Http\Controllers\Frontend\CartController::class, 'cartDelete'])->name("cart.delete");
+
 //End Frontend Section
 
 //the ['register'=>false] below removes the register link from
@@ -43,9 +47,6 @@ Route::get('product-detail/{slug}/', [App\Http\Controllers\Frontend\IndexControl
 Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
-
-//Cart Section
-Route::get('/cart/store', [App\Http\Controllers\Frontend\CartController::class, 'cartStore'])->name("cart.store");
 
 // Route::group(['prefix' => 'user', 'middleware' => ['auth', 'user']], function () {
 
