@@ -37,6 +37,7 @@ Route::get('product-category/{slug}/', [App\Http\Controllers\Frontend\IndexContr
 Route::get('product-detail/{slug}/', [App\Http\Controllers\Frontend\IndexController::class, 'productDetail'])->name('product.detail');
 
 //Cart Section
+Route::get('/cart', [App\Http\Controllers\Frontend\CartController::class, 'cart'])->name("cart");
 Route::post('/cart/store', [App\Http\Controllers\Frontend\CartController::class, 'cartStore'])->name("cart.store");
 Route::post('/cart/delete', [App\Http\Controllers\Frontend\CartController::class, 'cartDelete'])->name("cart.delete");
 
@@ -81,6 +82,11 @@ Route::group(['prefix' => 'admin/', 'middleware' => ['auth', 'admin']], function
     // User Section
     Route::resource('/user', \App\Http\Controllers\UserController::class);
     Route::post('user_status', [App\Http\Controllers\UserController::class, 'userStatus'])->name('user.status');
+
+    // Coupon Section
+    Route::resource('/coupon', \App\Http\Controllers\CouponController::class);
+    Route::post('coupon_status', [App\Http\Controllers\CouponController::class, 'couponStatus'])->name('coupon.status');
+
 });
 
 Route::group(['prefix' => 'seller', 'middleware' => ['auth', 'seller']], function () {
