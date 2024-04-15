@@ -29,6 +29,7 @@ Route::get('user/logout', [App\Http\Controllers\Frontend\IndexController::class,
 
 
 Route::get('/', [App\Http\Controllers\Frontend\IndexController::class, 'home'])->name('home');
+// Route::get('/', [App\Http\Controllers\Frontend\IndexController::class, 'home'])->name('home');
 
 //Product category
 Route::get('product-category/{slug}/', [App\Http\Controllers\Frontend\IndexController::class, 'productCategory'])->name('product.category');
@@ -40,6 +41,18 @@ Route::get('product-detail/{slug}/', [App\Http\Controllers\Frontend\IndexControl
 Route::get('/cart', [App\Http\Controllers\Frontend\CartController::class, 'cart'])->name("cart");
 Route::post('/cart/store', [App\Http\Controllers\Frontend\CartController::class, 'cartStore'])->name("cart.store");
 Route::post('/cart/delete', [App\Http\Controllers\Frontend\CartController::class, 'cartDelete'])->name("cart.delete");
+Route::post('/cart/update', [App\Http\Controllers\Frontend\CartController::class, 'cartUpdate'])->name("cart.update");
+
+
+//Coupon Section
+Route::post('coupon/add', [App\Http\Controllers\Frontend\CartController::class, 'couponAdd'])->name("coupon.add");
+
+//Wishlist Section
+Route::get('/wishlist', [App\Http\Controllers\Frontend\WishlistController::class, 'wishlist'])->name("wishlist");
+Route::post('/wishlist/store', [App\Http\Controllers\Frontend\WishlistController::class, 'wishlistStore'])->name("wishlist.store");
+Route::post('/wishlist/move-to-cart', [App\Http\Controllers\Frontend\WishlistController::class, 'moveToCart'])->name("wishlist.move.cart");
+Route::post('/wishlist/delete', [App\Http\Controllers\Frontend\WishlistController::class, 'wishlistDelete'])->name("wishlist.delete");
+// Route::post('/cart/update', [App\Http\Controllers\Frontend\CartController::class, 'cartUpdate'])->name("cart.update");
 
 //End Frontend Section
 
@@ -86,6 +99,10 @@ Route::group(['prefix' => 'admin/', 'middleware' => ['auth', 'admin']], function
     // Coupon Section
     Route::resource('/coupon', \App\Http\Controllers\CouponController::class);
     Route::post('coupon_status', [App\Http\Controllers\CouponController::class, 'couponStatus'])->name('coupon.status');
+
+    // Shipping Section
+    Route::resource('/shipping', \App\Http\Controllers\ShippingController::class);
+    Route::post('shipping_status', [App\Http\Controllers\ShippingController::class, 'shippingStatus'])->name('shipping.status');
 
 });
 

@@ -1,7 +1,6 @@
 @extends('frontend.layouts.master')
 
 @section('content')
-
     <!-- Breadcumb Area -->
     <div class="breadcumb_area">
         <div class="container h-100">
@@ -9,7 +8,7 @@
                 <div class="col-12">
                     <h5>Cart</h5>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{route("home")}}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
                         <li class="breadcrumb-item active">Cart</li>
                     </ol>
                 </div>
@@ -24,43 +23,8 @@
             <div class="row justify-content-between">
                 <div class="col-12">
                     <div class="cart-table">
-                        <div class="table-responsive">
-                            <table class="table table-bordered mb-30">
-                                <thead>
-                                    <tr>
-                                        <th scope="col"><i class="icofont-ui-delete"></i></th>
-                                        <th scope="col">Image</th>
-                                        <th scope="col">Product</th>
-                                        <th scope="col">Unit Price</th>
-                                        <th scope="col">Quantity</th>
-                                        <th scope="col">Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach(\Gloudemans\Shoppingcart\Facades\Cart::instance("shopping")->content() as $item)
-                                    <tr>
-                                        {{-- dd($item); --}}
-                                        <th scope="row">
-                                            <i class="icofont-close cart_delete" data-id="{{$item->rowId}}"> </i>
-                                        </th>
-                                        <td>
-                                            <img src="{{$item->model->photo}}" alt="Product">
-                                        </td>
-                                        <td>
-                                            <a href="{{route("product.detail", $item->model->slug)}}">{{$item->name}}</a>
-                                        </td>
-                                        <td>${{$item->price}}</td>
-                                        <td>
-                                            <div class="quantity">
-                                                <input type="number" class="qty-text" id="qty2" step="1" min="1" max="99" name="quantity" value="{{$item->qty}}">
-                                            </div>
-                                        </td>
-                                        <td>${{$item->subtotal()}}</td>
-                                    </tr>
-                                    @endforeach
-
-                                </tbody>
-                            </table>
+                        <div class="table-responsive" id="cart_list">
+                            @include('frontend.layouts._cart-lists')
                         </div>
                     </div>
                 </div>
@@ -71,9 +35,11 @@
                         <p>Enter your coupon code here &amp; get awesome discounts!</p>
                         <!-- Form -->
                         <div class="coupon-form">
-                            <form action="#">
-                                <input type="text" class="form-control" placeholder="Enter Your Coupon Code">
-                                <button type="submit" class="btn btn-primary">Apply Coupon</button>
+                            <form action="{{ route('coupon.add') }}" id="coupon-form" method="post">
+                                @csrf
+                                <input type="text" class="form-control" name="code"
+                                    placeholder="Enter Your Coupon Code">
+                                <button type="submit" class="coupon-btn btn btn-primary">Apply Coupon</button>
                             </form>
                         </div>
                     </div>
@@ -115,41 +81,115 @@
 
 
 
-@section("scripts")
-<script>
-    $(document).on("click", ".cart_delete", function(e) {
-        e.preventDefault();
+@section('scripts')
+    <script>
+        $(document).on("click", ".coupon-btn", function(e) {
+            e.preventDefault();
+            var code = $('input[name = code]').val();
+            $('.coupon-btn').html('<i class="fas fa-spinner fa-spin"></> Applying...');
+            $('#coupon-form').submit();
+        });
+    </script>
+    <script>
+        $(document).on("click", ".cart_delete", function(e) {
+            e.preventDefault();
 
-        var cart_id = $(this).data("id");
+            var cart_id = $(this).data("id");
 
-        var token = "{{ csrf_token() }}";
-        var path = "{{ route('cart.delete') }}";
+            var token = "{{ csrf_token() }}";
+            var path = "{{ route('cart.delete') }}";
 
-        $.ajax({
-            url: path,
-            type: "POST",
-            dataType: "JSON",
-            data: {
-                cart_id: cart_id,
-                _token: token,
-            },
-            success: function(data) {
-                console.log(data);
-                if (data["status"]) {
-                    $('body #header-ajax').html(data['header']);
-                    $('body #cart_counter').html(data['cart_count']);
-                    swal({
-                        title: "Good job!",
-                        text: data["message"],
-                        icon: "success",
-                        button: "Ok",
-                    });
+            $.ajax({
+                url: path,
+                type: "POST",
+                dataType: "JSON",
+                data: {
+                    cart_id: cart_id,
+                    _token: token,
+                },
+                success: function(data) {
+                    console.log(data);
+                    if (data["status"]) {
+                        $('body #header-ajax').html(data['header']);
+                        $('body #cart_counter').html(data['cart_count']);
+                        swal({
+                            title: "Good job!",
+                            text: data["message"],
+                            icon: "success",
+                            button: "Ok",
+                        });
+                    }
+                },
+                error: function(err) {
+                    console.log(err);
                 }
-            },
-            error: function(err) {
-                console.log(err);
+            });
+        });
+    </script>
+
+
+    <script>
+        $(document).on("click", ".qty-text", function() {
+            var id = $(this).data("id");
+
+            var spinner = $(this),
+                input = spinner.closest("div.quantity").find('input[type="number"]')
+
+            if (input.val() == 1) {
+                return false
+            }
+
+            if (input.val() != 1) {
+                var newval = parseFloat(input.val());
+                $('#qty-input-' + id).val(newval);
+
+                var productQuantity = $("#update-cart-" + id).data("product-quantity");
+                // alert(productQuantity);
+                update_cart(id, productQuantity);
             }
         });
-    });
-</script>
+
+        function update_cart(id, productQuantity) {
+            // console.log("id",id);
+            // alert(productQuantity);
+
+            var rowId = id;
+            var product_qty = $('#qty-input-' + rowId).val();
+            var token = "{{ csrf_token() }}";
+            var path = "{{ route('cart.update') }}";
+            $.ajax({
+                url: path,
+                type: "POST",
+                data: {
+                    _token: token,
+                    product_qty: product_qty,
+                    rowId: rowId,
+                    productQuantity: productQuantity,
+                },
+                success: function(data) {
+                    console.log(data);
+                    if (data["status"]) {
+                        $('body #header-ajax').html(data['header']);
+                        $('body #cart_counter').html(data['cart_count']);
+                        $('body #cart_list').html(data['cart_list']);
+                        // swal({
+                        //     title: "Good job!",
+                        //     text: data["message"],
+                        //     icon: "success",
+                        //     button: "Ok",
+                        // });
+                        alert(data["message"])
+                    } else {
+                        alert(data["message"])
+
+                    }
+                },
+                // error: function(err) {
+                //     // console.log(err);
+                //     alert(data["message"])
+
+                // }
+            });
+        }
+    </script>
 @endsection

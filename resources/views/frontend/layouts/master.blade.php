@@ -38,6 +38,8 @@
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+    {{-- @yield('scripts') --}}
+
     <script>
         $(document).on("click", ".cart_delete", function(e) {
             e.preventDefault();

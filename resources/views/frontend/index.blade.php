@@ -213,7 +213,7 @@
     <!-- Quick View Modal Area -->
 
     @php
-        $new_products=\App\Models\Product::where(['status'=>'active', 'conditions'=>'new'])->orderBy('id', 'DESC')->limit('10')->get();
+        $new_products=\App\Models\Product::where(['status'=>'active', 'conditions'=>'anew'])->orderBy('id', 'DESC')->limit('10')->get();
     @endphp
 
     @if (count($new_products)>0)
