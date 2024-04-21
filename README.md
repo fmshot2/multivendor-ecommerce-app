@@ -3,11 +3,10 @@ Multivendor Ecommerce App is a multivendor ecommerce app built with PHP/Laravel.
 
 ## Running the Project
  To run the project, follow the following steps:
- 1.    download the folder and  unzip, add your db in the env, then run php artisan migrate.
- 2.    Run composer install to install all dependencies
+ 1.     Download the folder and  unzip, add your db in the env, then run php artisan migrate.
+ 2.     Run composer install to install all dependencies
  3.     Add your database name in the .env file,
- 4.     Run php artisan migrate.
-The Users table and access token tables will be automatically generated
+ 4.     Run php artisan migrate --seed. 
 
 Now you are good to go! 
  
